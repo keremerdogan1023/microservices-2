@@ -1,0 +1,7 @@
+# Project exclude paths
+/api-gateway/target/
+/common-package/target/
+/discovery-server/target/
+/filter-service/target/
+/inventory-service/target/
+/rental-service/target/
