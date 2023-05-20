@@ -1,10 +1,10 @@
 spring:
   application:
-    name: rental-service
+    name: maintenance-service
   datasource:
     username: postgres
     password: '12345'
-    url: jdbc:postgresql://localhost:5432/rentaldb-t2
+    url: jdbc:postgresql://localhost:5432/maintenancedb-dev
   jpa:
     properties:
       hibernate:
@@ -16,10 +16,16 @@ spring:
       bootstrap-servers: http://localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-  cloud:
-    openfeign:
-      circuitbreaker:
-        enabled: true
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: http://localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 eureka:
   client:
     fetch-registry: true
@@ -32,9 +38,8 @@ eureka:
 resilience4j:
   retry:
     instances:
-      rentalToInventory:
+      maintenanceToInventory:
         max-attempts: 5
         wait-duration: 15s
-
 server:
   port: 0

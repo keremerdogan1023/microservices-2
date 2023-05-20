@@ -1,5 +1,7 @@
 package com.kodlamaio.inventoryservice.business.kafka.consumer;
 
+import com.kodlamaio.commonpackage.events.maintenance.MaintenanceCreatedEvent;
+import com.kodlamaio.commonpackage.events.maintenance.MaintenanceDeletedEvent;
 import com.kodlamaio.commonpackage.events.rental.RentalCreatedEvent;
 import com.kodlamaio.commonpackage.events.rental.RentalDeletedEvent;
 import com.kodlamaio.inventoryservice.business.abstracts.CarService;
@@ -12,23 +14,23 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class RentalConsumer {
+public class MaintenanceConsumer {
     private final CarService service;
 
     @KafkaListener(
-            topics = "rental-created",
-            groupId = "inventory-rental-create"
+            topics = "maintenance-created",
+            groupId = "inventory-maintenance-create"
     )
-    public void consume(RentalCreatedEvent event) {
-        service.changeStateByCarId(State.Rented, event.getCarId());
-        log.info("Rental created events consumed {}", event);
+    public void consume(MaintenanceCreatedEvent event) {
+        service.changeStateByCarId(State.Maintenance, event.getCarId());
+        log.info("Maintenance created events consumed {}", event);
     }
     @KafkaListener(
-            topics = "rental-deleted",
-            groupId = "inventory-rental-delete"
+            topics = "maintenance-deleted",
+            groupId = "inventory-maintenance-delete"
     )
-    public void consume(RentalDeletedEvent event) {
+    public void consume(MaintenanceDeletedEvent event) {
         service.changeStateByCarId(State.Available, event.getCarId());
-        log.info("Rental deleted event consumed {}", event);
+        log.info("Maintenance deleted event consumed {}", event);
     }
 }

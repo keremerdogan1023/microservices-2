@@ -1,7 +1,7 @@
 package com.kodlamaio.filterservice.business.kafka.consumer;
 
-import com.kodlamaio.commonpackage.events.rental.RentalCreatedEvent;
-import com.kodlamaio.commonpackage.events.rental.RentalDeletedEvent;
+import com.kodlamaio.commonpackage.events.maintenance.MaintenanceCreatedEvent;
+import com.kodlamaio.commonpackage.events.maintenance.MaintenanceDeletedEvent;
 import com.kodlamaio.filterservice.business.abstracts.FilterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,27 +11,28 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class RentalConsumer {
+public class MaintenanceConsumer {
     private final FilterService service;
 
     @KafkaListener(
-            topics = "rental-created",
-            groupId = "filter-rental-create"
+            topics = "maintenance-created",
+            groupId = "filter-maintenance-create"
     )
-    public void consume(RentalCreatedEvent event) {
+    public void consume(MaintenanceCreatedEvent event) {
         var filter = service.getByCarId(event.getCarId());
-        filter.setState("Rented");
+        filter.setState("Maintenance");
         service.add(filter);
-        log.info("Rental created events consumed {}", event);
+        log.info("Maintenance created events consumed {}", event);
     }
+
     @KafkaListener(
-            topics = "rental-deleted",
-            groupId = "filter-rental-delete"
+            topics = "maintenance-deleted",
+            groupId = "filter-maintenance-delete"
     )
-    public void consume(RentalDeletedEvent event) {
+    public void consume(MaintenanceDeletedEvent event) {
         var filter = service.getByCarId(event.getCarId());
         filter.setState("Available");
         service.add(filter);
-        log.info("Rental deleted event consumed {}", event);
+        log.info("Maintenance deleted event consumed {}", event);
     }
 }
