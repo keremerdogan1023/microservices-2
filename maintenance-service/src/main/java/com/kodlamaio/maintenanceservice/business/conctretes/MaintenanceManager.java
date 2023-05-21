@@ -1,7 +1,9 @@
-package com.kodlamaio.maintenanceservice.business.concretes;
+package com.kodlamaio.maintenanceservice.business.conctretes;
 
 import com.kodlamaio.commonpackage.events.maintenance.MaintenanceCreatedEvent;
 import com.kodlamaio.commonpackage.events.maintenance.MaintenanceDeletedEvent;
+import com.kodlamaio.commonpackage.events.rental.RentalCreatedEvent;
+import com.kodlamaio.commonpackage.events.rental.RentalDeletedEvent;
 import com.kodlamaio.commonpackage.kafka.producer.KafkaProducer;
 import com.kodlamaio.commonpackage.utils.mappers.ModelMapperService;
 import com.kodlamaio.maintenanceservice.business.abstracts.MaintenanceService;

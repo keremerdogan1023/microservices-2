@@ -3,7 +3,6 @@ package com.kodlamaio.rentalservice.business.concretes;
 import com.kodlamaio.commonpackage.events.rental.RentalCreatedEvent;
 import com.kodlamaio.commonpackage.events.rental.RentalDeletedEvent;
 import com.kodlamaio.commonpackage.kafka.producer.KafkaProducer;
-import com.kodlamaio.commonpackage.utils.dto.CreateRentalPaymentRequest;
 import com.kodlamaio.commonpackage.utils.mappers.ModelMapperService;
 import com.kodlamaio.rentalservice.business.abstracts.RentalService;
 import com.kodlamaio.rentalservice.business.dto.requests.CreateRentalRequest;
@@ -69,12 +68,6 @@ public class RentalManager implements RentalService {
         rules.checkIfRentalExists(id);
         var rental = mapper.forRequest().map(request, Rental.class);
         rental.setId(id);
-
-        CreateRentalPaymentRequest paymentRequest = new CreateRentalPaymentRequest();
-        mapper.forRequest().map(request.getPaymentRequest(), paymentRequest);
-        paymentRequest.setPrice(getTotalPrice(rental));
-        rules.ensurePaymentIsProcessed(paymentRequest);
-
         repository.save(rental);
         var response = mapper.forResponse().map(rental, UpdateRentalResponse.class);
 
