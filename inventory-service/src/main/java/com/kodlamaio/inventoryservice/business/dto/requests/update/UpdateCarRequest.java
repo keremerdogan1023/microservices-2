@@ -14,8 +14,8 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateCarRequest {
@@ -25,7 +25,7 @@ public class UpdateCarRequest {
     @NotFutureYear
     private int modelYear;
     @NotBlank
-    @Pattern(regexp = Regex.Plate)
+    @Pattern(regexp = Regex.plate)
     private String plate;
     @NotNull
     private State state;

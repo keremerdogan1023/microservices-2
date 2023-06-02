@@ -2,8 +2,6 @@ package com.kodlamaio.maintenanceservice.business.conctretes;
 
 import com.kodlamaio.commonpackage.events.maintenance.MaintenanceCreatedEvent;
 import com.kodlamaio.commonpackage.events.maintenance.MaintenanceDeletedEvent;
-import com.kodlamaio.commonpackage.events.rental.RentalCreatedEvent;
-import com.kodlamaio.commonpackage.events.rental.RentalDeletedEvent;
 import com.kodlamaio.commonpackage.kafka.producer.KafkaProducer;
 import com.kodlamaio.commonpackage.utils.mappers.ModelMapperService;
 import com.kodlamaio.maintenanceservice.business.abstracts.MaintenanceService;
@@ -87,15 +85,9 @@ public class MaintenanceManager implements MaintenanceService {
         repository.deleteById(id);
     }
 
-   /* private void makeCarAvailableIfIsCompletedFalse(UUID id) {
-        UUID carId = repository.findById(id).get().getCar().getId();
-        if (repository.existsByCarIdAndIsCompletedIsFalse(carId)) {
-            carService.changeState(carId, State.AVAILABLE);
-        }
-    } */
-   private void sendKafkaMaintenanceCreatedEvent(UUID carId) {
-       producer.sendMessage(new MaintenanceCreatedEvent(carId), "maintenance-created");
-   }
+    private void sendKafkaMaintenanceCreatedEvent(UUID carId) {
+        producer.sendMessage(new MaintenanceCreatedEvent(carId), "maintenance-created");
+    }
 
     private void sendKafkaMaintenanceDeletedEvent(UUID id) {
         var carId = repository.findById(id).orElseThrow().getCarId();

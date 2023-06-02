@@ -13,9 +13,8 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateCarRequest {
@@ -25,7 +24,7 @@ public class CreateCarRequest {
     @NotFutureYear
     private int modelYear;
     @NotBlank
-    @Pattern(regexp = Regex.Plate)
+    @Pattern(regexp = Regex.plate)
     private String plate;
     @Min(value = 1)
     private double dailyPrice;

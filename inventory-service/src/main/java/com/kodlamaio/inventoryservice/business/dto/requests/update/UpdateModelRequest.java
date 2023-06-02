@@ -10,13 +10,12 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateModelRequest {
     @NotNull
-    @NotBlank
     private UUID brandId;
     @NotBlank
     @Size(min = 2, max = 20)

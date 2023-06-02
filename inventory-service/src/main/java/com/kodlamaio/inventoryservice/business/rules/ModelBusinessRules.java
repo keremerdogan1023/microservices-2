@@ -11,7 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ModelBusinessRules {
     private final ModelRepository repository;
-    private final BrandRepository brandRepository;
 
     public void checkIfModelExists(UUID id) {
         if (!repository.existsById(id)) {

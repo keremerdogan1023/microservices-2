@@ -8,8 +8,8 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateCarResponse {
@@ -20,3 +20,5 @@ public class CreateCarResponse {
     private State state;
     private double dailyPrice;
 }
+
+

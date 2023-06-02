@@ -1,12 +1,7 @@
 package com.kodlamaio.commonpackage.utils.results;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 
-@Setter
-@Getter
 public class ExceptionResult<T> {
     private LocalDateTime timestamp;
     private String type;

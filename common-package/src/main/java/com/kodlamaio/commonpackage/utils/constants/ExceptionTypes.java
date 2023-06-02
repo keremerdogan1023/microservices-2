@@ -6,5 +6,6 @@ public class ExceptionTypes {
         public static final String Business = "BUSINESS_EXCEPTION";
         public static final String Runtime = "RUNTIME_EXCEPTION";
         public static final String DataIntegrityViolation = "DATA_INTEGRITY_VIOLATION_EXCEPTION";
+
     }
 }

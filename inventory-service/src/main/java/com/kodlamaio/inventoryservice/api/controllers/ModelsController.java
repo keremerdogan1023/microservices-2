@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/models")
+@AllArgsConstructor
 public class ModelsController {
     private final ModelService service;
 
