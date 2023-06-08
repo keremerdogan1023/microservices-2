@@ -6,7 +6,7 @@ spring:
       server:
         default-label: master
         git:
-          uri: https://github.com/keremerdogan1023/config-server-micro
+          uri: https://github.com/astavist/config-server-t2
   profiles:
     active: dev
 server:

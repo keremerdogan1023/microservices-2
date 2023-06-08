@@ -59,7 +59,7 @@ public class RentalManager implements RentalService {
     public CreateRentalResponse add(CreateRentalRequest request) {
         rules.ensureCarIsAvailable(request.getCarId());
         var rental = mapper.forRequest().map(request, Rental.class);
-        rental.setId(null);
+        rental.setId(UUID.randomUUID());
         rental.setTotalPrice(getTotalPrice(rental));
         rental.setRentedAt(LocalDate.now());
 
